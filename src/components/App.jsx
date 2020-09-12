@@ -5,19 +5,19 @@ import Info from "./Info.jsx";
 import Videos from './Videos.jsx';
 import Maps from './Maps.jsx';
 import Reviews from './Reviews.jsx';
-import { Grid } from "@material-ui/core";
+import { Grid, Paper } from "@material-ui/core";
 
 class App extends React.Component {
   render() {
     return (
-      <Grid>
+      <Paper>
         <Navbar />
         <Jumbotron />
         <Info />
         <Videos />
         <Maps />
         <Reviews />
-      </Grid>
+      </Paper>
     );
   }
 }
