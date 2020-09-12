@@ -1,8 +1,11 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 
 const Navbar = () => {
-  return <div>Navbar</div>;
+  return (
+  <div>
+    <Typography color="primary">Navbar</Typography>
+  </div>)
 };
 
 export default Navbar;
