@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --mode production",
     "react-dev": "webpack -d --watch",
-    "start": "live-server ./dist"
+    "start": "nodemon server/server.js"
   },
   "keywords": [],
   "author": "",
