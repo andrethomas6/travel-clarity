@@ -5,19 +5,22 @@ import Info from "./Info.jsx";
 import Videos from './Videos.jsx';
 import Maps from './Maps.jsx';
 import Reviews from './Reviews.jsx';
-import { Grid, Paper } from "@material-ui/core";
+import { Grid, Paper, Box } from "@material-ui/core";
 
 class App extends React.Component {
   render() {
     return (
-      <Paper>
-        <Navbar />
-        <Jumbotron />
-        <Info />
-        <Videos />
-        <Maps />
-        <Reviews />
-      </Paper>
+      <Grid container>
+        <Grid item xs={12}><Navbar /></Grid>
+        <Grid item xs={12}><Jumbotron /></Grid>
+        <Grid item xs={12}><Info /></Grid>
+       {/* 
+       <Grid item xs={12}><Videos /></Grid>
+        <Grid item xs={12}><Maps /></Grid>
+        <Grid item xs={12}><Reviews /></Grid>
+        */}
+        
+      </Grid>
     );
   }
 }
