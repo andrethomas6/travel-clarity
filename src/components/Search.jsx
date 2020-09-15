@@ -7,13 +7,14 @@ import {
   AccordionDetails,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import {
+import SearchIcon from '@material-ui/icons/Search';import {
   FormControl,
   Input,
   InputLabel,
   Select,
   MenuItem,
   TextField,
+  Fab
 } from "@material-ui/core";
 
 // ***** STYLES SECTION *****
@@ -29,6 +30,14 @@ const useStyles = makeStyles((theme) => ({
   },
   fields: {
     alignItems: "space-around",
+    marginX: 'auto',
+    maxWidth: '1000px'
+  },
+  SearchButton: {
+    marginX: "15px",
+  },
+  extendedIcon: {
+    marginRight: theme.spacing(1),
   },
 }));
 
@@ -60,8 +69,11 @@ const Search = () => {
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
         id="panel1a-header"
+        justify="center"
       >
-        <Typography>SEARCH</Typography>
+        <Box marginX="auto" paddingLeft={7}>
+        <Typography >Find Your Next Destination!</Typography>
+        </Box>
       </AccordionSummary>
       <AccordionDetails className={classes.fields}>
         <Grid container justify="space-around">
@@ -77,7 +89,10 @@ const Search = () => {
             />
           </Grid>
           <Grid item xs={12} sm={"auto"}>
-            <Button variant="outlined">SEARCH</Button>
+          <Fab variant="extended" className={classes.SearchButton} color="secondary">
+            <SearchIcon className={classes.extendedIcon} color="primary"/>
+            Search
+          </Fab>
           </Grid>
           <Grid item xs={12} sm={"auto"}>
             <TextField

@@ -5,14 +5,15 @@ import { makeStyles } from "@material-ui/core/styles"
 
 // ***** STYLES SECTION *****
 const useStyles = makeStyles((theme) => ({
-  info: {
+  root: {
     height: '450px'
   }
 }))
 
 // ***** COMPONENT SECTION *****
 const Videos = () => {
-  return <div>Videos</div>;
+  const classes= useStyles();
+  return <div className={classes.root}></div>;
 };
 
 export default Videos;

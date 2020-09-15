@@ -16,10 +16,10 @@ class App extends React.Component {
         <Grid item xs={12}><Jumbotron /></Grid>
         <Grid item xs={12}><Search /></Grid>
         <Grid item xs={12}><Info /></Grid>
-       {/* 
-       <Grid item xs={12}><Videos /></Grid>
-        <Grid item xs={12}><Maps /></Grid>
         <Grid item xs={12}><Reviews /></Grid>
+        <Grid item xs={12}><Videos /></Grid>
+       {/* 
+        <Grid item xs={12}><Maps /></Grid>
         */}
         
       </Box>
