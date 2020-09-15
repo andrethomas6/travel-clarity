@@ -15,6 +15,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
+
+
+// ***** STYLES SECTION *****
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
@@ -82,7 +85,7 @@ const useStyles = makeStyles((theme) => ({
 
 
 
-
+// ***** COMPONENT SECTION *****
 const Navbar = () => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
