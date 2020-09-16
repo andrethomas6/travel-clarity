@@ -21,7 +21,8 @@ import SearchIcon from '@material-ui/icons/Search';import {
 const useStyles = makeStyles((theme) => ({
   heading: {
     backgroundColor: "#dae1e7",
-    // color: "#fff"
+    width: '100%',
+    justify: 'center',
   },
   formControl: {
     margin: theme.spacing(1),
@@ -29,9 +30,10 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 300,
   },
   fields: {
-    alignItems: "space-around",
+    justifyItems: "center",
     marginX: 'auto',
-    maxWidth: '1000px'
+    maxWidth: '700px',
+    backgroundColor: "#333"
   },
   SearchButton: {
     marginX: "15px",
@@ -76,8 +78,8 @@ const Search = () => {
         </Box>
       </AccordionSummary>
       <AccordionDetails className={classes.fields}>
-        <Grid container justify="space-around">
-          <Grid item xs={12} sm={"auto"}>
+        <Grid container justify="center" marginX="auto">
+          <Grid item xs={12} sm={4}>
             <TextField
               id="outlined-search"
               name="city"
@@ -88,13 +90,13 @@ const Search = () => {
               onChange={(event) => handleChange(event)}
             />
           </Grid>
-          <Grid item xs={12} sm={"auto"}>
+          <Grid item xs={12} sm={4}>
           <Fab variant="extended" className={classes.SearchButton} color="secondary">
             <SearchIcon className={classes.extendedIcon} color="primary"/>
             Search
           </Fab>
           </Grid>
-          <Grid item xs={12} sm={"auto"}>
+          <Grid item xs={12} sm={4}>
             <TextField
               id="outlined-search"
               name="Country"

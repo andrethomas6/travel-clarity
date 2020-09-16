@@ -6,9 +6,28 @@ import Info from "./Info.jsx";
 import Videos from './Videos.jsx';
 import Maps from './Maps.jsx';
 import Reviews from './Reviews.jsx';
-import { Grid, Paper, Box } from "@material-ui/core";
+import { Grid, Paper, Box, Button } from "@material-ui/core";
 
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      locations: [],
+      category: ""
+    }
+  }
+
+  handleSearch() {
+    axios.get('/info', {
+      params: {
+        location: this.state.locations,
+        category: this.state.category
+      }
+      
+    })
+  }
+
+
   render() {
     return (
       <Box m={-1} >
@@ -21,6 +40,7 @@ class App extends React.Component {
        {/* 
         <Grid item xs={12}><Maps /></Grid>
         */}
+        <Button onClick={this.handleSearch}>Test Button</Button>
         
       </Box>
     );
