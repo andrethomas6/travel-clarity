@@ -13,8 +13,8 @@ app.use(express.urlencoded({ extended: false }));
 
 app.get('/info', (req, res) => {
 
-  // console.log('Got Request');
-
+  // console.log('Got Request', req.query);
+  // res.send(["ok"])
   let category = req.query.category || "sightseeing";
 
   var config = {

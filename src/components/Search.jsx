@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
     justifyItems: "center",
     marginX: 'auto',
     maxWidth: '700px',
-    backgroundColor: "#333"
   },
   SearchButton: {
     marginX: "15px",
@@ -44,7 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // ***** COMPONENT SECTION *****
-const Search = () => {
+const Search = ({ query, setQuery, handleSearch }) => {
   const classes = useStyles();
 
   let options =
@@ -62,8 +61,6 @@ const Search = () => {
     event.target.name === "city" ? setCity(event.target.value) : null;
     event.target.name === "country" ? setCountry(event.target.value) : null;
   };
-  console.log("category:", category);
-  console.log("city:", city);
 
   return (
     <Accordion className={classes.heading}>
@@ -82,30 +79,19 @@ const Search = () => {
           <Grid item xs={12} sm={4}>
             <TextField
               id="outlined-search"
-              name="city"
-              label="Search City"
+              name="location"
+              label="Search Location"
               type="search"
               variant="outlined"
-              value={city}
-              onChange={(event) => handleChange(event)}
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
             />
           </Grid>
           <Grid item xs={12} sm={4}>
-          <Fab variant="extended" className={classes.SearchButton} color="secondary">
+          <Fab onClick={handleSearch()} variant="extended" className={classes.SearchButton} color="secondary">
             <SearchIcon className={classes.extendedIcon} color="primary"/>
             Search
           </Fab>
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <TextField
-              id="outlined-search"
-              name="Country"
-              label="Search Country"
-              type="search"
-              variant="outlined"
-              value={country}
-              onChange={(event) => handleChange(event)}
-            />
           </Grid>
         </Grid>
       </AccordionDetails>
