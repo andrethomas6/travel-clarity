@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Paper, Grid, Typography, Button} from "@material-ui/core";
+import { Box, Paper, Grid, Typography, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
 import {
   Accordion,
@@ -7,35 +7,31 @@ import {
   AccordionDetails,
 } from "@material-ui/core";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import SearchIcon from '@material-ui/icons/Search';import {
+import SearchIcon from "@material-ui/icons/Search";
+import ShuffleIcon from '@material-ui/icons/Shuffle';
+import {
   FormControl,
   Input,
   InputLabel,
   Select,
   MenuItem,
   TextField,
-  Fab
+  Fab,
 } from "@material-ui/core";
 
 // ***** STYLES SECTION *****
 const useStyles = makeStyles((theme) => ({
+  root: {
+    flexGrow: 1,
+  },
   heading: {
     backgroundColor: "#dae1e7",
-    width: '100%',
-    justify: 'center',
-  },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 100,
-    maxWidth: 300,
+    minHeight: '75px',
   },
   fields: {
-    justifyItems: "center",
-    marginX: 'auto',
-    maxWidth: '700px',
-  },
-  SearchButton: {
-    marginX: "15px",
+    margin: "auto",
+    maxWidth: "700px",
+    alignSelf: "center"
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
@@ -62,8 +58,13 @@ const Search = ({ query, setQuery, handleSearch }) => {
     event.target.name === "country" ? setCountry(event.target.value) : null;
   };
 
+  const handleShuffle = () => {
+    handleSearch()
+  }
+
   return (
-    <Accordion className={classes.heading}>
+    <div className={classes.root}>
+      {/* <Accordion className={classes.heading}>
       <AccordionSummary
         expandIcon={<ExpandMoreIcon />}
         aria-controls="panel1a-content"
@@ -95,43 +96,50 @@ const Search = ({ query, setQuery, handleSearch }) => {
           </Grid>
         </Grid>
       </AccordionDetails>
-    </Accordion>
+    </Accordion> */}
+
+      <Grid
+        container
+        className={classes.heading}
+        justify="center"
+      >
+        <Grid item xs={12} sm={2}></Grid>
+        <Grid item xs={12} sm={4} className={classes.fields}>
+          <Fab
+            onClick={handleShuffle()}
+            variant="extended"
+            className={classes.SearchButton}
+            color="secondary"
+          >
+            <ShuffleIcon className={classes.extendedIcon} color="primary" />
+            SHUFFLE
+          </Fab>
+        </Grid>
+        <Grid item xs={12} sm={3} className={classes.fields}>
+          <TextField
+            id="outlined-search"
+            name="location"
+            label="Search Location"
+            type="search"
+            variant="outlined"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+          />
+        </Grid>
+        <Grid item xs={12} sm={3} className={classes.fields}>
+          <Fab
+            onClick={handleSearch()}
+            variant="extended"
+            className={classes.SearchButton}
+            color="secondary"
+          >
+            <SearchIcon className={classes.extendedIcon} color="primary" />
+            SEARCH
+          </Fab>
+        </Grid>
+      </Grid>
+    </div>
   );
 };
 
 export default Search;
-//  <FormControl className={classes.formControl}>
-//   <InputLabel id="category-select-label">Category</InputLabel>
-//   <Select
-//     labelId="category-select-label"
-//     name="category"
-//     value={category}
-//     onChange={handleChange}
-//   >
-//     {categoryOptions.map((category) => (
-//       <option
-//         key={category}
-//         value={category}
-//       >
-//         {category}
-//       </option>
-//     ))}
-//   </Select>
-// </FormControl>
-//   <FormControl variant="outlined" className={classes.formControl}>
-//   <InputLabel id="demo-simple-select-outlined-label">Category</InputLabel>
-//   <Select
-//     labelId="demo-simple-select-outlined-label"
-//     id="demo-simple-select-outlined"
-//     value={category}
-//     onChange={handleChange}
-//     label="category"
-//   >
-//     <MenuItem value="">
-//       <em>None</em>
-//     </MenuItem>
-//     <MenuItem value={10}>Ten</MenuItem>
-//     <MenuItem value={20}>Twenty</MenuItem>
-//     <MenuItem value={30}>Thirty</MenuItem>
-//   </Select>
-// </FormControl>
