@@ -6,7 +6,7 @@ require("dotenv").config;
 
 const { sydney, spain } = require("./SampleData/sightseeing.js");
 const sightseeing = require("./SampleData/sightseeing.js");
-const { account, token } = require("./API_Keys/triposoKey.js");
+// const { account, token } = require("./API_Keys/triposoKey.js");
 const { Story } = require("../db/stories_db.js");
 
 const PORT = process.env.PORT || 4000;
