@@ -121,6 +121,7 @@ class App extends React.Component {
           <Story
             stories={this.state.stories}
             location={this.state.info[0].location_ids}
+            getStories={() => this.getStories.bind(this)}
           />
         </Grid>
         <Grid item xs={12}>

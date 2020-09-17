@@ -8,11 +8,11 @@ import {
   Avatar,
   IconButton,
   Fab,
-  Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import SyncIcon from "@material-ui/icons/Sync";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
@@ -21,6 +21,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
 
 // ***** STYLES SECTION *****
 const useStyles = makeStyles((theme) => ({
@@ -55,10 +57,17 @@ const useStyles = makeStyles((theme) => ({
     marginRight: theme.spacing(1),
     minWidth: 250,
   },
+  refresh: {
+    margin: "0 25px",
+  },
 }));
 
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 // ***** COMPONENT SECTION *****
-const Story = ({ stories, location }) => {
+const Story = ({ stories, location, getStories }) => {
   const classes = useStyles();
 
   let data = [
@@ -102,19 +111,18 @@ const Story = ({ stories, location }) => {
     setBody("");
   };
 
-  // const getStories = () => {
-  //   axios
-  //     .get("/story", {
-  //       params: {
-  //         city: location[0],
-  //         country: location[1],
-  //       },
-  //     })
-  //     .then((results) => {
-  //       setStories(results.data);
-  //     })
-  //     .catch((error) => console.log(error));
-  // };
+  const [openSnack, setOpenSnack] = useState(false);
+
+  const handleClickSnack = () => {
+    setOpenSnack(true);
+  };
+
+  const handleCloseSnack = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setOpenSnack(false);
+  };
 
   const handleSubmit = () => {
     axios({
@@ -132,7 +140,7 @@ const Story = ({ stories, location }) => {
     })
       .then((response) => {
         console.log("response", response);
-        // getStories();
+        handleClickSnack();
         handleClose();
         handleClear();
       })
@@ -216,7 +224,13 @@ const Story = ({ stories, location }) => {
           <AddIcon color="primary" />
           View More Stories
         </Fab>
-
+        <Fab
+          color="secondary"
+          className={classes.refresh}
+          onClick={getStories()}
+        >
+          <SyncIcon color="primary" />
+        </Fab>
         <Fab
           variant="extended"
           color="secondary"
@@ -311,6 +325,12 @@ const Story = ({ stories, location }) => {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar open={openSnack} autoHideDuration={6000} onClose={handleCloseSnack}>
+        <Alert onClose={handleCloseSnack} severity="success">
+          You story saved successfully. Thanks for Sharing!
+        </Alert>
+      </Snackbar>
     </Grid>
   );
 };

@@ -4,11 +4,9 @@ const cors = require("cors");
 const faker = require("faker");
 require("dotenv").config;
 
-// const mongoose = require("mongoose");
-
 const { sydney, spain } = require("./SampleData/sightseeing.js");
 const sightseeing = require("./SampleData/sightseeing.js");
-// const { account, token } = require("./API_Keys/triposoKey.js");
+const { account, token } = require("./API_Keys/triposoKey.js");
 const { Story } = require("../db/stories_db.js");
 
 const PORT = process.env.PORT || 4000;
@@ -19,16 +17,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.get("/info", (req, res) => {
-  // console.log('Got Request', req.query);
-  // res.send(["ok"])
   let category = req.query.category || "sightseeing";
 
   var config = {
     method: "get",
     url: `https://www.triposo.com/api/20200803/poi.json?location_id=${req.query.location}&tag_labels=${category}&count=4&fields=id,name,score,intro,snippet,tag_labels,location_id,location_ids,images&order_by=-score`,
     headers: {
-      "X-Triposo-Account": process.env.account,
-      "X-Triposo-Token": process.env.token,
+      "X-Triposo-Account": process.env.account || account,
+      "X-Triposo-Token": process.env.token || token,
       Cookie: "__cfduid=dd84dc074ff82a67aff2ea7b658dead2c1600208594",
     },
   };
