@@ -8,7 +8,7 @@ require("dotenv").config;
 
 const { sydney, spain } = require("./SampleData/sightseeing.js");
 const sightseeing = require("./SampleData/sightseeing.js");
-const { account, token } = require("./API_Keys/triposoKey.js");
+// const { account, token } = require("./API_Keys/triposoKey.js");
 const { Story } = require("../db/stories_db.js");
 
 const PORT = process.env.PORT || 4000;
@@ -27,9 +27,9 @@ app.get("/info", (req, res) => {
     method: "get",
     url: `https://www.triposo.com/api/20200803/poi.json?location_id=${req.query.location}&tag_labels=${category}&count=4&fields=id,name,score,intro,snippet,tag_labels,location_id,location_ids,images&order_by=-score`,
     headers: {
-      "X-Triposo-Account": process.env.account || account,
-      "X-Triposo-Token": process.env.token || token,
-      // Cookie: "__cfduid=dd84dc074ff82a67aff2ea7b658dead2c1600208594",
+      "X-Triposo-Account": process.env.account,
+      "X-Triposo-Token": process.env.token,
+      Cookie: "__cfduid=dd84dc074ff82a67aff2ea7b658dead2c1600208594",
     },
   };
 
