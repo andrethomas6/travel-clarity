@@ -1,8 +1,8 @@
 const express = require("express");
 const axios = require("axios");
-const cors = require('cors');
-const faker = require('faker');
-require('dotenv').config
+const cors = require("cors");
+const faker = require("faker");
+require("dotenv").config;
 
 // const mongoose = require("mongoose");
 
@@ -13,7 +13,7 @@ const { Story } = require("../db/stories_db.js");
 
 const PORT = process.env.PORT || 4000;
 const app = express();
-app.use(cors())
+app.use(cors());
 app.use(express.static("dist"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -27,9 +27,9 @@ app.get("/info", (req, res) => {
     method: "get",
     url: `https://www.triposo.com/api/20200803/poi.json?location_id=${req.query.location}&tag_labels=${category}&count=4&fields=id,name,score,intro,snippet,tag_labels,location_id,location_ids,images&order_by=-score`,
     headers: {
-      "X-Triposo-Account": account,
-      "X-Triposo-Token": token,
-      Cookie: "__cfduid=dd84dc074ff82a67aff2ea7b658dead2c1600208594",
+      "X-Triposo-Account": process.env.account || account,
+      "X-Triposo-Token": process.env.token || token,
+      // Cookie: "__cfduid=dd84dc074ff82a67aff2ea7b658dead2c1600208594",
     },
   };
 
@@ -47,14 +47,9 @@ app.get("/info", (req, res) => {
 });
 
 app.get("/story", (req, res) => {
-  console.log("Get", req.query);
-  Story.find(
-    { city: req.query.city },
-    (err, docs) => {
-      console.log('find all docs', docs);
-      res.json(docs);
-    }
-  );
+  Story.find({ city: req.query.city }, (err, docs) => {
+    res.json(docs);
+  });
 });
 
 app.post("/story", (req, res) => {
@@ -63,7 +58,7 @@ app.post("/story", (req, res) => {
 
   Story.create(userStory, (err, doc) => {
     if (err) return console.log(err);
-    console.log(doc);
+
     res.status(200).json(doc);
   });
 });
