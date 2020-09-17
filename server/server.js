@@ -7,9 +7,9 @@ const faker = require('faker');
 const { sydney, spain } = require("./SampleData/sightseeing.js");
 const sightseeing = require("./SampleData/sightseeing.js");
 const { account, token } = require("./API_Keys/triposoKey.js");
-const { Story } = require("../db/stories.js");
+const { Story } = require("../db/stories_db.js");
 
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 const app = express();
 app.use(cors())
 app.use(express.static("dist"));

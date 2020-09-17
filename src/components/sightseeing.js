@@ -2219,10 +2219,42 @@ let dubai = [
   }
 ]
 
+let Hawaii = [{
+  "id": "",
+  "name": "",
+  "intro": "",
+  "location_ids": [".","."],
+  "images": {
+    "source_url": ""
+  },
+  "id": "",
+  "name": "",
+  "intro": "",
+  "location_ids": [".","."],
+  "images": {
+    "source_url": ""
+  },
+  "id": "",
+  "name": "",
+  "intro": "",
+  "location_ids": [".","."],
+  "images": {
+    "source_url": ""
+  },
+  "id": "",
+  "name": "",
+  "intro": "",
+  "location_ids": [".","."],
+  "images": {
+    "source_url": ""
+  },
+}]
+
 
 
 module.exports = {
   spain,
   sydney,
-  dubai
+  dubai,
+  Hawaii
 };

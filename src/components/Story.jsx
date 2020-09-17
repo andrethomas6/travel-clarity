@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import moment from "moment";
 import {
   Grid,
   Paper,
@@ -74,8 +75,8 @@ const Story = ({ stories, location }) => {
     },
   ];
   const [open, setOpen] = useState(false);
-  const [city, setCity] = useState("");
-  const [country, setCountry] = useState("");
+  const [city, setCity] = useState(location[0]);
+  const [country, setCountry] = useState(location[1]);
   const [date, setDate] = useState("");
   const [username, setUsername] = useState("");
   const [title, setTitle] = useState("");
@@ -83,8 +84,10 @@ const Story = ({ stories, location }) => {
   const [avatar, setAvatar] = useState("");
   // const [stories, setStories] = useState(stories);
   const [displayed, setDisplayed] = useState(2);
-  
+
   const handleClickOpen = () => {
+    setCity(location[0]);
+    setCountry(location[1]);
     setOpen(true);
   };
 
@@ -98,7 +101,6 @@ const Story = ({ stories, location }) => {
     setTitle("");
     setBody("");
   };
-
 
   // const getStories = () => {
   //   axios
@@ -156,7 +158,7 @@ const Story = ({ stories, location }) => {
             </Grid>
             <Grid item>
               <Avatar
-                alt="Remy Sharp"
+                alt="avatar"
                 src={story.avatar}
                 className={classes.avatar}
               />
@@ -164,15 +166,15 @@ const Story = ({ stories, location }) => {
             </Grid>
           </Grid>
           <Grid container item>
-            <Grid item>
+            <Grid item xs={12}>
               <Typography variant="h6">
                 {story.title} |{" "}
-                <Typography variant="caption">
-                  Travel Date: {story.date}
+                <Typography variant="caption" color="secondary">
+                  Travel Date: {moment(story.date).format("MMMM YYYY")}
                 </Typography>
               </Typography>
             </Grid>
-            <Grid item>
+            <Grid item xs={12}>
               <Typography variant="body1">{story.body}</Typography>
             </Grid>
           </Grid>
@@ -240,8 +242,9 @@ const Story = ({ stories, location }) => {
             id="city"
             label="City"
             type="text"
-            value={location[0]}
+            value={city}
             required
+            onChange={(event) => setCity(event.target.value)}
             // disabled
           />
           <TextField
@@ -249,8 +252,9 @@ const Story = ({ stories, location }) => {
             id="Country"
             label="Country"
             type="text"
-            value={location[1]}
+            value={country}
             required
+            onChange={(event) => setCountry(event.target.value)}
             // disabled
           />
           <TextField

@@ -15,11 +15,12 @@ class App extends React.Component {
     super(props);
     this.state = {
       info: dubai,
-      location: "",
+      location: "Dubai",
       category: "",
       stories: [],
     };
   }
+
 
   setQuery(query) {
     this.setState({
@@ -40,10 +41,9 @@ class App extends React.Component {
         });
       })
       .catch((error) => console.log(error));
-  };
+  }
 
   handleSearch() {
-    console.log("location", this.state.location);
     axios
       .get("/info", {
         params: {
@@ -65,26 +65,36 @@ class App extends React.Component {
       });
   }
 
-
   handleShuffle() {
     let options = [
-      "France",
-      "Spain",
-      "United_States",
-      "China",
-      "Italy",
-      "Turkey",
-      "Mexico",
-      "Germany",
-      "Thailand",
-      "United_Kingdom",
+      "Paris",
+      "Madrid",
+      "Atlanta",
+      "Shanghai",
+      "Rome",
+      "Istanbul",
+      "Cancun",
+      "Munich",
+      "Bangkok",
+      "London",
+      "Dubai",
+      "Auckland",
+      "Seoul",
+      "Sydney",
+      "Lima",
+      "Cairo",
+      "Mumbai",
+      "Marrakech",
+      "Toronto"
     ];
     this.setState({
-      location: options[parseInt(Math.random() * (options.length - 1))]
-    })
-    setTimeout(this.handleSearch.bind(this), 1000)
+      location: options[parseInt(Math.random() * (options.length - 1))],
+    });
+    setTimeout(this.handleSearch.bind(this), 1000);
+  }
 
-    
+  componentDidMount() {
+    this.getStories()
   }
 
   render() {
@@ -108,7 +118,10 @@ class App extends React.Component {
           <Info info={this.state.info} />
         </Grid>
         <Grid item xs={12}>
-          <Story stories={this.state.stories} location={this.state.info[1].location_ids}/>
+          <Story
+            stories={this.state.stories}
+            location={this.state.info[0].location_ids}
+          />
         </Grid>
         <Grid item xs={12}>
           <Videos />
