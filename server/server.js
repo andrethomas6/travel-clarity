@@ -25,7 +25,6 @@ app.get("/info", (req, res) => {
     headers: {
       "X-Triposo-Account": process.env.account || account,
       "X-Triposo-Token": process.env.token || token,
-      Cookie: "__cfduid=dd84dc074ff82a67aff2ea7b658dead2c1600208594",
     },
   };
 

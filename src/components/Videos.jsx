@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles"
 // ***** STYLES SECTION *****
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '250px'
+    height: '100px'
   }
 }))
 
