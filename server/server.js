@@ -1,6 +1,7 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require('cors');
+const faker = require('faker');
 // const mongoose = require("mongoose");
 
 const { sydney, spain } = require("./SampleData/sightseeing.js");
@@ -56,6 +57,7 @@ app.get("/story", (req, res) => {
 
 app.post("/story", (req, res) => {
   let userStory = req.body;
+  userStory.avatar = faker.image.avatar();
 
   Story.create(userStory, (err, doc) => {
     if (err) return console.log(err);

@@ -11,6 +11,7 @@ const storySchema = new Schema ({
   title: String,
   body: String,
   likes: Number,
+  avatar: String
 });
 
 const Story = mongoose.model('Story', storySchema);

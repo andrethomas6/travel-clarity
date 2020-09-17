@@ -7,9 +7,11 @@ import {
   Avatar,
   IconButton,
   Fab,
+  Box,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 import FavoriteTwoToneIcon from "@material-ui/icons/FavoriteTwoTone";
 import Button from "@material-ui/core/Button";
 import { TextField } from "@material-ui/core";
@@ -31,6 +33,7 @@ const useStyles = makeStyles((theme) => ({
     minWidth: "500px",
     maxWidth: "1000px",
     padding: "20px",
+    margin: "15px",
   },
   avatar: {
     width: theme.spacing(7),
@@ -57,15 +60,30 @@ const useStyles = makeStyles((theme) => ({
 const Story = ({ location }) => {
   const classes = useStyles();
 
+  let data = [
+    {
+      city: "Dubai",
+      country: "United_Arab_Emirates",
+      date: "06-06-2019",
+      username: "java949",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+      title: "Catamaran Sunset Trip",
+      body:
+        "We had private catamaran sunset cruise for 6 people. From start to finish, it was fantastic with Gianna looking after us. Great food and drink. We were near Atlantis and the sunset was incredible. A lovely way to see islands.",
+    },
+  ];
+
   const [open, setOpen] = useState(false);
-  const [city, setCity] = useState("Santorini");
-  const [country, setCountry] = useState("Greece");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
   const [date, setDate] = useState("");
   const [username, setUsername] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [stories, setStories] = useState([]);
-
+  const [avatar, setAvatar] = useState("");
+  const [stories, setStories] = useState(data);
+  const [displayed, setDisplayed] = useState(2);
   const handleClickOpen = () => {
     setCity(location[0]);
     setCountry(location[1]);
@@ -84,21 +102,18 @@ const Story = ({ location }) => {
   };
 
   const getStories = () => {
-    axios.get("/story", {
-      params: {
-        city: "Dubai",
-        country: country
-      },
-    })
-    .then((results) => {
-      setStories(results.data)
-    })
-    .catch((error) => console.log(error))
+    axios
+      .get("/story", {
+        params: {
+          city: "Dubai",
+          country: country,
+        },
+      })
+      .then((results) => {
+        setStories(results.data);
+      })
+      .catch((error) => console.log(error));
   };
-
-  // useEffect(() => {
-  //   getStories();
-  // });
 
   const handleSubmit = () => {
     axios({
@@ -111,11 +126,11 @@ const Story = ({ location }) => {
         username: username,
         title: title,
         body: body,
-        likes: 0
+        likes: 0,
       },
     })
       .then((response) => {
-        console.log('response', response);
+        console.log("response", response);
         getStories();
         handleClose();
         handleClear();
@@ -123,43 +138,46 @@ const Story = ({ location }) => {
       .catch((error) => console.log(error));
   };
 
-  let data = [1];
+  const handleDisplayed = (action) => {
+    console.log(action);
+    console.log("displayed", displayed);
+    console.log("stories", stories);
+    if (action === "add" && displayed < stories.length) {
+      setDisplayed(displayed + 2);
+    } else if (action === "sub" && displayed > 0) {
+      setDisplayed(displayed - 2);
+    }
+  };
 
-  let storiesTemplate = data.map((story, i) => {
-    console.log('stories', stories);
+  let storiesTemplate = stories.slice(0, displayed).map((story, i) => {
     return (
       <Paper key={i} className={classes.paper} elevation={20}>
         <Grid container direction="column" spacing={2}>
           <Grid container item justify="space-between">
             <Grid item>
-              <Typography variant="subtitle1">Santorini</Typography>
-              <Typography variant="subtitle2">Greece</Typography>
+              <Typography variant="subtitle1">{story.city}</Typography>
+              <Typography variant="subtitle2">{story.country}</Typography>
             </Grid>
             <Grid item>
               <Avatar
                 alt="Remy Sharp"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80"
+                src={story.avatar}
                 className={classes.avatar}
               />
-              <Typography variant="caption">grace123</Typography>
+              <Typography variant="caption">{story.username}</Typography>
             </Grid>
           </Grid>
           <Grid container item>
             <Grid item>
               <Typography variant="h6">
-                Island hopping |{" "}
+                {story.title} |{" "}
                 <Typography variant="caption">
-                  Travel Date: January 2019
+                  Travel Date: {story.date}
                 </Typography>
               </Typography>
             </Grid>
             <Grid item>
-              <Typography variant="body1">
-                "We had private catamaran sunset cruise for 6 people. From start
-                to finish, it was fantastic with Gianna looking after us. Great
-                food and drink. We were on Atlantis and the sunset was
-                incredible. A lovely way to see islands."
-              </Typography>
+              <Typography variant="body1">{story.body}</Typography>
             </Grid>
           </Grid>
           <Grid container item>
@@ -190,6 +208,25 @@ const Story = ({ location }) => {
       </Grid>
       <Grid item className={classes.stories}>
         {storiesTemplate}
+      </Grid>
+      <Grid container item xs={12} justify="center">
+        <Fab
+          variant="extended"
+          color="secondary"
+          onClick={() => handleDisplayed("add")}
+        >
+          <AddIcon color="primary" />
+          View More Stories
+        </Fab>
+
+        <Fab
+          variant="extended"
+          color="secondary"
+          onClick={() => handleDisplayed("sub")}
+        >
+          <RemoveIcon color="primary" />
+          View Less Stories
+        </Fab>
       </Grid>
 
       <Dialog
