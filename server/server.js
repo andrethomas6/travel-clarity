@@ -2,6 +2,8 @@ const express = require("express");
 const axios = require("axios");
 const cors = require('cors');
 const faker = require('faker');
+require('dotenv').config
+
 // const mongoose = require("mongoose");
 
 const { sydney, spain } = require("./SampleData/sightseeing.js");

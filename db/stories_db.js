@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+require('dotenv').config
 const { Schema } = mongoose;
 mongoose.connect(
   process.env.MONGODB_URI || "mongodb://localhost:27017/travel-clarity",
