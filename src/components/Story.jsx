@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // ***** COMPONENT SECTION *****
-const Story = ({ location }) => {
+const Story = ({ stories, location }) => {
   const classes = useStyles();
 
   let data = [
@@ -73,7 +73,6 @@ const Story = ({ location }) => {
         "We had private catamaran sunset cruise for 6 people. From start to finish, it was fantastic with Gianna looking after us. Great food and drink. We were near Atlantis and the sunset was incredible. A lovely way to see islands.",
     },
   ];
-
   const [open, setOpen] = useState(false);
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
@@ -82,11 +81,10 @@ const Story = ({ location }) => {
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [avatar, setAvatar] = useState("");
-  const [stories, setStories] = useState(data);
+  // const [stories, setStories] = useState(stories);
   const [displayed, setDisplayed] = useState(2);
+  
   const handleClickOpen = () => {
-    setCity(location[0]);
-    setCountry(location[1]);
     setOpen(true);
   };
 
@@ -101,19 +99,20 @@ const Story = ({ location }) => {
     setBody("");
   };
 
-  const getStories = () => {
-    axios
-      .get("/story", {
-        params: {
-          city: "Dubai",
-          country: country,
-        },
-      })
-      .then((results) => {
-        setStories(results.data);
-      })
-      .catch((error) => console.log(error));
-  };
+
+  // const getStories = () => {
+  //   axios
+  //     .get("/story", {
+  //       params: {
+  //         city: location[0],
+  //         country: location[1],
+  //       },
+  //     })
+  //     .then((results) => {
+  //       setStories(results.data);
+  //     })
+  //     .catch((error) => console.log(error));
+  // };
 
   const handleSubmit = () => {
     axios({
@@ -131,7 +130,7 @@ const Story = ({ location }) => {
     })
       .then((response) => {
         console.log("response", response);
-        getStories();
+        // getStories();
         handleClose();
         handleClear();
       })
@@ -139,9 +138,6 @@ const Story = ({ location }) => {
   };
 
   const handleDisplayed = (action) => {
-    console.log(action);
-    console.log("displayed", displayed);
-    console.log("stories", stories);
     if (action === "add" && displayed < stories.length) {
       setDisplayed(displayed + 2);
     } else if (action === "sub" && displayed > 0) {
@@ -244,7 +240,7 @@ const Story = ({ location }) => {
             id="city"
             label="City"
             type="text"
-            value={city}
+            value={location[0]}
             required
             // disabled
           />
@@ -253,7 +249,7 @@ const Story = ({ location }) => {
             id="Country"
             label="Country"
             type="text"
-            value={country}
+            value={location[1]}
             required
             // disabled
           />

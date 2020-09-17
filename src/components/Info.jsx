@@ -128,6 +128,7 @@ const Info = ({ info }) => {
             className={classes.media}
             image={place.images[0].source_url}
             title={place.name}
+            onClick={handleClickOpen("paper")}
           />
           <CardContent>
             <CardActions disableSpacing className={classes.icons}>

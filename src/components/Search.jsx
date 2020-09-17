@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // ***** COMPONENT SECTION *****
-const Search = ({ query, setQuery, handleSearch }) => {
+const Search = ({ query, setQuery, handleSearch, handleShuffle }) => {
   const classes = useStyles();
 
   let options =
@@ -58,45 +58,8 @@ const Search = ({ query, setQuery, handleSearch }) => {
     event.target.name === "country" ? setCountry(event.target.value) : null;
   };
 
-  const handleShuffle = () => {
-    handleSearch()
-  }
-
   return (
     <div className={classes.root}>
-      {/* <Accordion className={classes.heading}>
-      <AccordionSummary
-        expandIcon={<ExpandMoreIcon />}
-        aria-controls="panel1a-content"
-        id="panel1a-header"
-        justify="center"
-      >
-        <Box marginX="auto" paddingLeft={7}>
-        <Typography >Find Your Next Destination!</Typography>
-        </Box>
-      </AccordionSummary>
-      <AccordionDetails className={classes.fields}>
-        <Grid container justify="center" marginX="auto">
-          <Grid item xs={12} sm={4}>
-            <TextField
-              id="outlined-search"
-              name="location"
-              label="Search Location"
-              type="search"
-              variant="outlined"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-            />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-          <Fab onClick={handleSearch()} variant="extended" className={classes.SearchButton} color="secondary">
-            <SearchIcon className={classes.extendedIcon} color="primary"/>
-            Search
-          </Fab>
-          </Grid>
-        </Grid>
-      </AccordionDetails>
-    </Accordion> */}
 
       <Grid
         container

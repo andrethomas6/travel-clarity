@@ -17,6 +17,7 @@ class App extends React.Component {
       info: dubai,
       location: "",
       category: "",
+      stories: [],
     };
   }
 
@@ -25,8 +26,24 @@ class App extends React.Component {
       location: query,
     });
   }
+
+  getStories() {
+    axios
+      .get("/story", {
+        params: {
+          city: this.state.location,
+        },
+      })
+      .then((results) => {
+        this.setState({
+          stories: results.data,
+        });
+      })
+      .catch((error) => console.log(error));
+  };
+
   handleSearch() {
-    console.log("location", location);
+    console.log("location", this.state.location);
     axios
       .get("/info", {
         params: {
@@ -40,9 +57,34 @@ class App extends React.Component {
           info: response.data,
         });
       })
+      .then(() => {
+        this.getStories();
+      })
       .catch((error) => {
-        console.log(error);
+        console.log("error", error);
       });
+  }
+
+
+  handleShuffle() {
+    let options = [
+      "France",
+      "Spain",
+      "United_States",
+      "China",
+      "Italy",
+      "Turkey",
+      "Mexico",
+      "Germany",
+      "Thailand",
+      "United_Kingdom",
+    ];
+    this.setState({
+      location: options[parseInt(Math.random() * (options.length - 1))]
+    })
+    setTimeout(this.handleSearch.bind(this), 1000)
+
+    
   }
 
   render() {
@@ -59,13 +101,14 @@ class App extends React.Component {
             query={this.state.location}
             setQuery={this.setQuery.bind(this)}
             handleSearch={() => this.handleSearch.bind(this)}
+            handleShuffle={() => this.handleShuffle.bind(this)}
           />
         </Grid>
         <Grid item xs={12}>
           <Info info={this.state.info} />
         </Grid>
         <Grid item xs={12}>
-          <Story location={this.state.info[1].location_ids} />
+          <Story stories={this.state.stories} location={this.state.info[1].location_ids}/>
         </Grid>
         <Grid item xs={12}>
           <Videos />
