@@ -21,7 +21,6 @@ class App extends React.Component {
     };
   }
 
-
   setQuery(query) {
     this.setState({
       location: query,
@@ -70,10 +69,8 @@ class App extends React.Component {
       "Paris",
       "Madrid",
       "Atlanta",
-      "Shanghai",
       "Rome",
       "Istanbul",
-      "Cancun",
       "Munich",
       "Bangkok",
       "London",
@@ -81,11 +78,9 @@ class App extends React.Component {
       "Auckland",
       "Seoul",
       "Sydney",
-      "Lima",
       "Cairo",
       "Mumbai",
-      "Marrakech",
-      "Toronto"
+      "Toronto",
     ];
     this.setState({
       location: options[parseInt(Math.random() * (options.length - 1))],
@@ -94,7 +89,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getStories()
+    this.getStories();
   }
 
   render() {
