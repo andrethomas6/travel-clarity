@@ -1,11 +1,11 @@
 # Travel Clarity
 > Find the Most popular places in the world!
 
-## Features
->> Shuffle search
->> City or country search
->> Top 4 most popular places based on search
->> Read and share your stories of that destination
+## Key Features
+- Shuffle search
+- City or country search
+- Top 4 most popular places based on search
+- Read and share your stories of that destination
 
 ## Demo
 
