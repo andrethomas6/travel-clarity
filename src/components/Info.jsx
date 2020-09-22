@@ -1,11 +1,3 @@
-// ***** STYLES SECTION *****
-// const useStyles = makeStyles((theme) => ({
-//   info: {
-//     height: "450px",
-//     backgroundColor: "#142850"
-//   },
-// }));
-
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import clsx from "clsx";
@@ -21,9 +13,6 @@ import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
 import ThumbUpAltRoundedIcon from "@material-ui/icons/ThumbUpAltRounded";
 import PublicTwoToneIcon from "@material-ui/icons/PublicTwoTone";
-import AirplaneIcon from "@material-ui/icons/AirplanemodeActiveRounded";
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import ShareIcon from "@material-ui/icons/Share";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import Button from "@material-ui/core/Button";
@@ -68,19 +57,6 @@ const useStyles = makeStyles((theme) => ({
 const Info = ({ info }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [city, setCity] = useState(["Santorini"]);
-  const [country, setCountry] = useState(["Greece"]);
-  const [image, setImage] = useState([
-    "https://images.unsplash.com/photo-1507501336603-6e31db2be093?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1953&q=80",
-  ]);
-  const [description, setDescription] = useState(
-    "Known for lunch. Recommended places to visit are Akrotiri, Ancient Thera and Santorini cable car."
-  );
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-  // console.log('info', info);
 
   const locationCards = info.map((place) => {
     const [open, setOpen] = React.useState(false);
@@ -137,7 +113,6 @@ const Info = ({ info }) => {
                 className={clsx(classes.expand, {
                   [classes.expandOpen]: expanded,
                 })}
-                // onClick={handleExpandClick}
                 onClick={handleClickOpen("paper")}
                 aria-expanded={expanded}
                 aria-label="show more"
@@ -172,7 +147,7 @@ const Info = ({ info }) => {
                 tabIndex={-1}
               >
                 {place.intro}
-                <hr/>
+                <hr />
                 <CardMedia
                   className={classes.media}
                   image={place.images[0].source_url}

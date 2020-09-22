@@ -21,8 +21,8 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
 
 // ***** STYLES SECTION *****
 const useStyles = makeStyles((theme) => ({
@@ -70,19 +70,6 @@ function Alert(props) {
 const Story = ({ stories, location, getStories }) => {
   const classes = useStyles();
 
-  let data = [
-    {
-      city: "Dubai",
-      country: "United_Arab_Emirates",
-      date: "06-06-2019",
-      username: "java949",
-      avatar:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
-      title: "Catamaran Sunset Trip",
-      body:
-        "We had private catamaran sunset cruise for 6 people. From start to finish, it was fantastic with Gianna looking after us. Great food and drink. We were near Atlantis and the sunset was incredible. A lovely way to see islands.",
-    },
-  ];
   const [open, setOpen] = useState(false);
   const [city, setCity] = useState(location[0]);
   const [country, setCountry] = useState(location[1]);
@@ -90,10 +77,11 @@ const Story = ({ stories, location, getStories }) => {
   const [username, setUsername] = useState("");
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
-  const [avatar, setAvatar] = useState("");
-  // const [stories, setStories] = useState(stories);
   const [displayed, setDisplayed] = useState(2);
+  const [openSnack, setOpenSnack] = useState(false);
+  // ** FUTURE ENHANCEMENT ** const [avatar, setAvatar] = useState("");
 
+  // ***** ACTION HANDLERS *****
   const handleClickOpen = () => {
     setCity(location[0]);
     setCountry(location[1]);
@@ -111,19 +99,18 @@ const Story = ({ stories, location, getStories }) => {
     setBody("");
   };
 
-  const [openSnack, setOpenSnack] = useState(false);
-
   const handleClickSnack = () => {
     setOpenSnack(true);
   };
 
   const handleCloseSnack = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpenSnack(false);
   };
 
+  // ***** STORY SUBMISSION FUNCTIONALITY  *****
   const handleSubmit = () => {
     axios({
       method: "post",
@@ -147,6 +134,7 @@ const Story = ({ stories, location, getStories }) => {
       .catch((error) => console.log(error));
   };
 
+  // ***** DISPLAY FUNCTIONALITY *****
   const handleDisplayed = (action) => {
     if (action === "add" && displayed < stories.length) {
       setDisplayed(displayed + 2);
@@ -259,7 +247,6 @@ const Story = ({ stories, location, getStories }) => {
             value={city}
             required
             onChange={(event) => setCity(event.target.value)}
-            // disabled
           />
           <TextField
             margin="dense"
@@ -269,7 +256,6 @@ const Story = ({ stories, location, getStories }) => {
             value={country}
             required
             onChange={(event) => setCountry(event.target.value)}
-            // disabled
           />
           <TextField
             id="date"
@@ -326,7 +312,11 @@ const Story = ({ stories, location, getStories }) => {
         </DialogActions>
       </Dialog>
 
-      <Snackbar open={openSnack} autoHideDuration={6000} onClose={handleCloseSnack}>
+      <Snackbar
+        open={openSnack}
+        autoHideDuration={6000}
+        onClose={handleCloseSnack}
+      >
         <Alert onClose={handleCloseSnack} severity="success">
           You story saved successfully. Thanks for Sharing!
         </Alert>

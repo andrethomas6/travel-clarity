@@ -1757,9 +1757,23 @@ let shapeData = (data) => {
   return data;
 }
 
+let sampleStory = [
+    {
+      city: "Dubai",
+      country: "United_Arab_Emirates",
+      date: "06-06-2019",
+      username: "java949",
+      avatar:
+        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+      title: "Catamaran Sunset Trip",
+      body:
+        "We had private catamaran sunset cruise for 6 people. From start to finish, it was fantastic with Gianna looking after us. Great food and drink. We were near Atlantis and the sunset was incredible. A lovely way to see islands.",
+    },
+  ];
+
 let test = shapeData(spain.results);
-// console.log(test[1].images);
 module.exports = {
   spain,
   sydney
 }
+

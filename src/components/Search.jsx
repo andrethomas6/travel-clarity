@@ -1,23 +1,8 @@
 import React, { useState } from "react";
-import { Box, Paper, Grid, Typography, Button } from "@material-ui/core";
+import { Grid, Typography, TextField, Fab } from "@material-ui/core";
 import { makeStyles } from "@material-ui/styles";
-import {
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
-} from "@material-ui/core";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import SearchIcon from "@material-ui/icons/Search";
-import ShuffleIcon from '@material-ui/icons/Shuffle';
-import {
-  FormControl,
-  Input,
-  InputLabel,
-  Select,
-  MenuItem,
-  TextField,
-  Fab,
-} from "@material-ui/core";
+import ShuffleIcon from "@material-ui/icons/Shuffle";
 
 // ***** STYLES SECTION *****
 const useStyles = makeStyles((theme) => ({
@@ -26,31 +11,44 @@ const useStyles = makeStyles((theme) => ({
   },
   heading: {
     backgroundColor: "#dae1e7",
-    minHeight: '75px',
+    minHeight: "75px",
   },
   fields: {
     margin: "auto",
     maxWidth: "700px",
-    alignSelf: "center"
+    alignSelf: "center",
   },
   extendedIcon: {
     marginRight: theme.spacing(1),
   },
+  found: {
+    display: "none",
+  },
+  unknown: {
+    backgroundColor: "#00909e",
+    color: "#dae1e7",
+  },
 }));
 
 // ***** COMPONENT SECTION *****
-const Search = ({ query, setQuery, handleSearch, handleShuffle }) => {
+const Search = ({
+  query,
+  found,
+  location,
+  setQuery,
+  handleSearch,
+  handleShuffle,
+}) => {
   const classes = useStyles();
 
+  // **FUTURE ENHANCEMENT**
   let options =
     "None,Traveling,Shopping,Sleeping,Eating,Sports,Hiking,Relaxing,Playing,Going Out,Sightseeing,Discovering";
   let categoryOptions = options.split(",");
-
   // Input Value Hooks
   const [category, setCategory] = useState("");
   const [city, setCity] = useState("");
   const [country, setCountry] = useState("");
-
   // Input Functions
   const handleChange = (event) => {
     event.target.name === "category" ? setCategory(event.target.value) : null;
@@ -60,12 +58,7 @@ const Search = ({ query, setQuery, handleSearch, handleShuffle }) => {
 
   return (
     <div className={classes.root}>
-
-      <Grid
-        container
-        className={classes.heading}
-        justify="center"
-      >
+      <Grid container className={classes.heading} justify="center">
         <Grid item xs={12} sm={2}></Grid>
         <Grid item xs={12} sm={4} className={classes.fields}>
           <Fab
@@ -100,6 +93,17 @@ const Search = ({ query, setQuery, handleSearch, handleShuffle }) => {
             SEARCH
           </Fab>
         </Grid>
+      </Grid>
+      <Grid
+        container
+        className={classes.heading}
+        justify="center"
+        className={found ? classes.found : classes.unknown}
+      >
+        <Typography variant="h4">
+          Our experts are still researching that locations. Check out{" "}
+          {location[0]} for now!
+        </Typography>
       </Grid>
     </div>
   );
