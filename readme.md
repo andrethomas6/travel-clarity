@@ -6,6 +6,7 @@
 - Shuffle search
 - Top 4 most popular places with expansion for more information
 - Read and share your stories of that destination
+![](Travel_Clarity_Overview.gif)
 
 ## Get Started
 - npm install to install the dependencies
